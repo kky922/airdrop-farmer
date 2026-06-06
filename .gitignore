@@ -1,0 +1,13 @@
+.env
+.env*
+__pycache__/
+*.py[cod]
+data/
+logs/
+wallets.json
+*.db
+*.log
+.DS_Store
+Thumbs.db
+.venv/
+.pytest_cache/

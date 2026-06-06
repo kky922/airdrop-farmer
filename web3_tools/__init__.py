@@ -1,0 +1,1 @@
+# web3_tools/__init__.py — Web3 유틸리티 모듈 (wallet, gas, chain configs)

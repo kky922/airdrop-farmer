@@ -1,0 +1,41 @@
+# Web3
+web3>=6.11.0
+eth-account>=0.11.0
+
+# 비동기 HTTP
+aiohttp==3.9.5
+
+# 브라우저 자동화
+playwright==1.44.0
+playwright-stealth==1.0.6
+
+# 스케줄러
+APScheduler==3.10.4
+
+# 데이터베이스
+sqlalchemy==2.0.30
+aiosqlite==0.20.0
+
+# 설정 관리
+pyyaml==6.0.1
+python-dotenv==1.0.1
+
+# 텔레그램
+python-telegram-bot>=20.7
+
+# 웹 대시보드
+fastapi==0.111.0
+uvicorn==0.30.1
+jinja2>=3.1.0
+
+# HTTP 요청
+requests>=2.31.0
+
+# 유틸리티
+loguru==0.7.2
+fake-useragent==1.5.1
+cryptography>=42.0.0
+
+# 테스트
+pytest==8.2.2
+pytest-asyncio==0.23.7

@@ -1,0 +1,85 @@
+bot:
+  name: "AirdropFarmingBot"
+  version: "2.0.0"
+  log_level: "INFO"
+  dry_run: false               # true=실제 TX 미실행, false=LIVE 실행
+  max_retries: 3               # 실패 시 재시도 횟수
+
+telegram:
+  bot_token: "${TELEGRAM_BOT_TOKEN}"
+  chat_id: "${TELEGRAM_CHAT_ID}"
+
+schedule:
+  daily_farming_hour: "2-4"       # 새벽 2~4시 (저가스 시간대)
+  weekly_scan_day: "monday"
+  weekly_scan_hour: 9
+  gas_check_interval: 6           # 시간
+  claim_check_interval: 1         # 시간
+
+active_projects:
+  - Ink              # Kraken L2, 아직 미상장
+  # - Unichain       # 가스비 ~$15 (유료 전환 후 활성화)
+  # - Abstract       # 가스비 ~$10
+  # - MetaMask       # 가스비 ~$30
+
+# 자동 프로젝트 관리
+project_management:
+  auto_activate_threshold: 70    # 주간 스캔 점수 ≥ 70이면 자동 활성화
+  auto_deactivate_after_days: 30 # 30일간 활동 없으면 자동 비활성화
+  max_active_projects: 10        # 최대 활성 프로젝트 수
+  auto_expire_completed: true    # 토큰 출시 완료 프로젝트 자동 만료
+
+proxies: []  # .env에서 PROXY_HOST_N / PROXY_USER_N / PROXY_PASS_N 로 설정
+
+chains:
+  ethereum:
+    rpc: "${ETHEREUM_RPC_URL}"
+    chain_id: 1
+  megaeth:
+    rpc: "https://rpc.megaeth.com"
+    chain_id: 6342
+  unichain:
+    rpc: "https://mainnet.unichain.org"
+    chain_id: 130
+  scroll:
+    rpc: "${SCROLL_RPC_URL}"
+    chain_id: 534352
+  berachain:
+    rpc: "${BERACHAIN_RPC_URL}"
+    chain_id: 80094
+  abstract:
+    rpc: "https://api.mainnet.abs.xyz"
+    chain_id: 2741
+  ink:
+    rpc: "https://rpc-gel.inkonchain.com"
+    chain_id: 57073
+
+anti_sybil:
+  min_delay_between_wallets: 7200   # 초 (2시간)
+  max_delay_between_wallets: 21600  # 초 (6시간)
+  min_tx_delay: 300                 # 초 (5분)
+  max_tx_delay: 1800                # 초 (30분)
+  amount_variance_pct: 0.3          # 30% 랜덤 변동
+  randomize_order: true
+
+gas:
+  max_gwei: 30
+  priority_gwei: 2
+  low_gas_threshold: 10
+
+wallets:
+  mnemonic: "${WALLET_MNEMONIC}"
+  count: "${NUM_WALLETS}"
+  master_private_key: "${MASTER_PRIVATE_KEY}"
+  master_address: "${MASTER_ADDRESS}"
+
+glm_api:
+  url: "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+  model: "glm-4-flash"
+  api_key: "${GLM_API_KEY}"
+  temperature: 0.3
+  timeout: 30
+
+dashboard:
+  host: "0.0.0.0"
+  port: 8080

@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  airdrop-bot:
+    build: .
+    container_name: airdrop_farming_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - TZ=Asia/Seoul
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: airdrop_dashboard
+    command: uvicorn monitor.dashboard:app --host 0.0.0.0 --port 8080
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./config.yaml:/app/config.yaml
+    depends_on:
+      - airdrop-bot
+    restart: unless-stopped
